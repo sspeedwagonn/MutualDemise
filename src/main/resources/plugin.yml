@@ -1,0 +1,8 @@
+name: MutualDemise
+version: '1.0'
+main: net.civicraft.mutualDemise.MutualDemise
+api-version: '1.21'
+commands:
+  mutualdemise:
+    aliases: md
+    permission: mutualdemise.reload

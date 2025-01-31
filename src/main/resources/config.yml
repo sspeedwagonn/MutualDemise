@@ -1,0 +1,2 @@
+everyone_dies: false # Set true if everyone should die if someone dies
+random_kill_count: 1 # Set how many players should die if everyone_dies is false
