@@ -35,22 +35,24 @@ public final class MutualDemise extends JavaPlugin implements Listener, CommandE
 
     @EventHandler
     public void onPlayerDeath(PlayerDeathEvent event) {
-        Player deadPlayer = event.getPlayer();
-        List<Player> onlinePlayers = new ArrayList<>(Bukkit.getOnlinePlayers());
-        onlinePlayers.remove(deadPlayer);
+        if (getConfig().getStringList("enabled_worlds").contains(event.getEntity().getWorld().getName())) {
+            Player deadPlayer = event.getPlayer();
+            List<Player> onlinePlayers = new ArrayList<>(Bukkit.getOnlinePlayers());
+            onlinePlayers.remove(deadPlayer);
 
-        if (getConfig().getBoolean("everyone_dies")) {
-            for (Player player : onlinePlayers) {
-                player.setHealth(0);
-            }
-        } else {
-            int randomKillCount = getConfig().getInt("random_kill_count", 1);
-            randomKillCount = Math.min(randomKillCount, onlinePlayers.size());
-            Random random = new Random();
-            for (int i = 0; i < randomKillCount; i++) {
-                Player player = onlinePlayers.get(random.nextInt(onlinePlayers.size()));
-                player.setHealth(0);
-                onlinePlayers.remove(player);
+            if (getConfig().getBoolean("everyone_dies")) {
+                for (Player player : onlinePlayers) {
+                    player.setHealth(0);
+                }
+            } else {
+                int randomKillCount = getConfig().getInt("random_kill_count", 1);
+                randomKillCount = Math.min(randomKillCount, onlinePlayers.size());
+                Random random = new Random();
+                for (int i = 0; i < randomKillCount; i++) {
+                    Player player = onlinePlayers.get(random.nextInt(onlinePlayers.size()));
+                    player.setHealth(0);
+                    onlinePlayers.remove(player);
+                }
             }
         }
     }
