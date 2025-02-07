@@ -23,6 +23,7 @@ public final class MutualDemise extends JavaPlugin implements Listener, CommandE
         saveDefaultConfig();
         getServer().getPluginManager().registerEvents(this, this);
         Objects.requireNonNull(getCommand("mutualdemise")).setExecutor(new MDCommand());
+        removeImmunePlayers();
     }
 
     @Override
@@ -40,7 +41,6 @@ public final class MutualDemise extends JavaPlugin implements Listener, CommandE
         if (getConfig().getStringList("enabled_worlds").contains(event.getEntity().getWorld().getName())) {
             Player deadPlayer = event.getPlayer();
             onlinePlayers.remove(deadPlayer);
-            removeImmunePlayers();
 
             if (getConfig().getBoolean("everyone_dies")) {
                 for (Player player : onlinePlayers) {
