@@ -4,3 +4,5 @@ enabled_worlds: # Worlds where if a player die, others die
   - "world"
   - "world_nether"
   - "world_the_end"
+immune_players:
+  
