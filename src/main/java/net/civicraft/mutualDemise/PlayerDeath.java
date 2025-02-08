@@ -5,32 +5,52 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.PlayerDeathEvent;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
 public class PlayerDeath implements Listener {
-    MutualDemise instance = MutualDemise.getInstance();
-    List<Player> onlinePlayers = instance.onlinePlayers;
+    private final MutualDemise instance = MutualDemise.getInstance();
+
     @EventHandler
     public void onPlayerDeath(PlayerDeathEvent event) {
-        if (instance.getConfig().getStringList("enabled_worlds").contains(event.getEntity().getWorld().getName())) {
-            Player deadPlayer = event.getPlayer();
-            onlinePlayers.remove(deadPlayer);
+        if (!isEnabledInWorld(event)) return;
+        Player deadPlayer = event.getEntity();
+        List<Player> victims = getVictims(deadPlayer);
 
-            if (instance.getConfig().getBoolean("everyone_dies")) {
-                for (Player player : onlinePlayers) {
-                    player.setHealth(0);
-                }
-            } else {
-                int randomKillCount = instance.getConfig().getInt("random_kill_count", 1);
-                randomKillCount = Math.min(randomKillCount, onlinePlayers.size());
-                Random random = new Random();
-                for (int i = 0; i < randomKillCount; i++) {
-                    Player player = onlinePlayers.get(random.nextInt(onlinePlayers.size()));
-                    player.setHealth(0);
-                    onlinePlayers.remove(player);
-                }
+        if (instance.getConfig().getBoolean("everyone_dies")) {
+            killAll(victims);
+        } else {
+            killRandom(victims);
+        }
+    }
+
+    private boolean isEnabledInWorld(PlayerDeathEvent event) {
+        return instance.getConfig().getStringList("enabled_worlds").contains(event.getEntity().getWorld().getName());
+    }
+
+    private List<Player> getVictims(Player deadPlayer) {
+        List<Player> players = new ArrayList<>();
+        for (Player p : deadPlayer.getServer().getOnlinePlayers()) {
+            if (!instance.getImmuneUUIDs().contains(p.getUniqueId()) && p != deadPlayer) {
+                players.add(p);
             }
+        }
+        return players;
+    }
+
+    private void killAll(List<Player> players) {
+        players.forEach(p -> p.setHealth(0));
+    }
+
+    private void killRandom(List<Player> players) {
+        int killCount = Math.min(instance.getConfig().getInt("random_kill_count", 1), players.size());
+
+        Random random = new Random();
+        List<Player> victims = new ArrayList<>(players);
+        for (int i = 0; i < killCount && !victims.isEmpty(); i++) {
+            Player target = victims.remove(random.nextInt(victims.size()));
+            target.setHealth(0);
         }
     }
 }
