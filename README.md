@@ -15,7 +15,7 @@ enabled_worlds: # Worlds where if a player die, others die
   - "world"
   - "world_nether"
   - "world_the_end"
-immune_players: # UUIDs of players who will not be killed
+immune_players: # UUIDs of players who are immune to being killed
 ```
 
 ## Commands
@@ -23,7 +23,7 @@ immune_players: # UUIDs of players who will not be killed
 `/mutualdemise add <Player>` - Grants player immunity
 `/mutualdemise remove <Player>` - Removes player of immunity
 
-Alias is `/md`
+Alias is `/md`, permission for all is `mutualdemise.admin`
 
 ## Update & Issues
 I will update this plugin on request with any feature, just create an issue and it will be done! I'll also fix any bugs or issues that come up with the plugin. Just let me know!

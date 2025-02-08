@@ -5,4 +5,4 @@ api-version: '1.21'
 commands:
   mutualdemise:
     aliases: md
-    permission: mutualdemise.reload
+    permission: mutualdemise.admin
