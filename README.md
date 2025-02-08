@@ -11,7 +11,19 @@ The config.yml file was designed to be as simple as possible. If `everyone_dies`
 ```yaml
 everyone_dies: false # Set true if everyone should die if someone dies
 random_kill_count: 1 # Set how many players should die if everyone_dies is false
+enabled_worlds: # Worlds where if a player die, others die
+  - "world"
+  - "world_nether"
+  - "world_the_end"
+immune_players: # UUIDs of players who will not be killed
 ```
+
+## Commands
+`/mutualdemise reload` - Reloads the plugin
+`/mutualdemise add <Player>` - Grants player immunity
+`/mutualdemise remove <Player>` - Removes player of immunity
+
+Alias is `/md`
 
 ## Update & Issues
 I will update this plugin on request with any feature, just create an issue and it will be done! I'll also fix any bugs or issues that come up with the plugin. Just let me know!
