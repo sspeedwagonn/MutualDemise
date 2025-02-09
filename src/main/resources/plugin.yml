@@ -1,5 +1,5 @@
 name: MutualDemise
-version: '1.0'
+version: '1.1'
 main: net.civicraft.mutualDemise.MutualDemise
 api-version: '1.21'
 commands:
