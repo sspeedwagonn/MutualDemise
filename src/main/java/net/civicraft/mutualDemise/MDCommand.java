@@ -9,16 +9,12 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.UUID;
 
+//TODO: tab complete
 public class MDCommand implements CommandExecutor {
     @Override
     public boolean onCommand(@NotNull CommandSender commandSender, @NotNull Command command, @NotNull String s, @NotNull String[] strings) {
         if (!(commandSender instanceof Player player)) {
             commandSender.sendMessage(Messages.NOT_PLAYER);
-            return true;
-        }
-
-        if (!player.hasPermission("mutualdemise.admin")) {
-            player.sendMessage(Messages.NO_PERMISSION);
             return true;
         }
 
@@ -32,12 +28,24 @@ public class MDCommand implements CommandExecutor {
 
         switch (subCmd) {
             case "add":
+                if (!player.hasPermission("mutualDemise.add")) {
+                    player.sendMessage(Messages.NO_PERMISSION);
+                    return true;
+                }
                 handleAdd(player, strings, instance);
                 break;
             case "remove":
+                if (!player.hasPermission("mutualDemise.remove")) {
+                    player.sendMessage(Messages.NO_PERMISSION);
+                    return true;
+                }
                 handleRemove(player, strings, instance);
                 break;
             case "reload":
+                if (!player.hasPermission("mutualDemise.reload")) {
+                    player.sendMessage(Messages.NO_PERMISSION);
+                    return true;
+                }
                 handleReload(player, instance);
                 break;
             default:

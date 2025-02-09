@@ -4,5 +4,15 @@ main: net.civicraft.mutualDemise.MutualDemise
 api-version: '1.21'
 commands:
   mutualdemise:
-    aliases: md
-    permission: mutualdemise.admin
+    description: "Manage immune players and reload the plugin"
+    aliases: [md]
+permissions:
+  mutualdemise.add:
+    description: "Grant player immunity"
+    default: op
+  mutualdemise.remove:
+    description: "Revoke player immunity"
+    default: op
+  mutualdemise.reload:
+    description: "Reload config.yml"
+    default: op
