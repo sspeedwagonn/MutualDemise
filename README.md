@@ -19,11 +19,13 @@ immune_players: # UUIDs of players who are immune to being killed
 ```
 
 ## Commands
-`/mutualdemise reload` - Reloads the plugin
-`/mutualdemise add <Player>` - Grants player immunity
-`/mutualdemise remove <Player>` - Removes player of immunity
+| Command                       | Permission          | Description             |
+|-------------------------------|---------------------|-------------------------|
+| /mutualdemise reload          | mutualdemise.reload | Reloads config.yml      |
+| /mutualdemise add <player>    | mutualdemise.add    | Grant player immunity   |
+| /mutualdemise remove <player> | mutualdemise.remove | Revokes player immunity |
 
-Alias is `/md`, permission for all is `mutualdemise.admin`
+Alias is `/md`
 
 ## Update & Issues
 I will update this plugin on request with any feature, just create an issue and it will be done! I'll also fix any bugs or issues that come up with the plugin. Just let me know!
